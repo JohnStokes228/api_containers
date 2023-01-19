@@ -1,0 +1,33 @@
+{
+  "name": "Daddy Longlegs",
+  "age": 24,
+  "time_of_accident": "2021/09/14",
+  "number_of_limbs_before_accident": 8,
+  "clothes": [
+    {
+      "brand": "CK",
+      "cost": 10,
+      "where_worn": "legs"
+    },
+    {
+      "brand": "GAP",
+      "cost": 100,
+      "where_worn": "legs"
+    },
+    {
+      "brand": "Tesco Value",
+      "cost": 1000,
+      "where_worn": "legs"
+    },
+    {
+      "brand": "Greggs",
+      "cost": 10000,
+      "where_worn": "legs"
+    },
+    {
+      "brand": "NYC",
+      "cost": 5,
+      "where_worn": "head"
+    }
+  ]
+}
