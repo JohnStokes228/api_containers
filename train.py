@@ -22,11 +22,16 @@ class NonsenseModel:
         X[self.extra_colname] = self.extra_colval
         X['prediction'] = random.random()
 
+        return X
+
     def fit(self, X: Any, y: Any):
         print(f"you'll do nuttin!... except provide me with the colname {self.extra_colname}")
 
 
+def main():
+    model = NonsenseModel(extra_colname='elaborate_transformation', extra_colval='lol jk its crap')
+    IOManager().save(model)
+
+
 if __name__ == '__main__':
-    IOManager().save(
-        NonsenseModel(extra_colname='elaborate_transformation', extra_colval='lol jk its crap')
-    )
+    main()

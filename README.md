@@ -7,3 +7,5 @@ to include:
 - utilise pydantic to validate inputs as apparently it works very well with fastapi
 - attempt a quality architecture rather than some shitty script but you know how these things go
 
+potentially worth replacing the current IOManager object with one that uses MLFlow, just so we can 
+get hands on with logging crap with that - does it work for random objects or just models though?
