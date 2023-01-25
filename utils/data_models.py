@@ -1,5 +1,5 @@
 """
-Pydantic models for json data we pass throughout.
+Models for data provided to API endpoint.
 """
 from pydantic import (
     BaseModel,
@@ -21,6 +21,7 @@ import utils.params as params
 
 
 class Clothes(BaseModel):
+    """Clothing datatype."""
     brand: str
     cost: foat
     where_worn: Optional[str]
@@ -39,6 +40,7 @@ class Clothes(BaseModel):
 
 
 class RequestBody(BaseModel):
+    """Expected structure of requests to API endpoint."""
     name: str
     age: int
     date_of_accident: str

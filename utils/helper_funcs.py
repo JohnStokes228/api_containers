@@ -2,6 +2,7 @@
 Functions used to provide standard utility in multiple places throughout.
 """
 from datetime import datetime
+from typing import Optional
 
 
 def str_to_dt(date: str) -> Optional[datetime]:
