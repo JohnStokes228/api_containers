@@ -4,9 +4,7 @@ Models for data provided to API endpoint.
 from pydantic import (
     BaseModel,
     validator,
-    Field,
 )
-from datetime import datetime
 from typing import (
     List,
     Optional,
@@ -23,7 +21,7 @@ import utils.params as params
 class Clothes(BaseModel):
     """Clothing datatype."""
     brand: str
-    cost: foat
+    cost: float
     where_worn: Optional[str]
 
     class Config:
@@ -52,7 +50,7 @@ class RequestBody(BaseModel):
 
     @validator('date_of_accident', pre=True)
     def check_accident_in_period(cls, value) -> Optional[str]:
-        if params.PERIOD_UPPER_BOUND >= str_to_dt(value) >= params.PERIOD_LOWER_BOUND:
+        if not params.PERIOD_UPPER_BOUND >= str_to_dt(value) >= params.PERIOD_LOWER_BOUND:
             raise DateNotInPeriodError(
                 date=value,
                 upper_bound=params.PERIOD_UPPER_BOUND,

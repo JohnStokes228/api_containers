@@ -1,7 +1,7 @@
 {
   "name": "Mowgli",
   "age": 12,
-  "time_of_accident": "2022/10/12",
+  "date_of_accident": "2022/10/12",
   "number_of_limbs_before_accident": 2,
   "clothes": [
     {
