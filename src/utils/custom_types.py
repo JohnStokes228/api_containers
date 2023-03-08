@@ -4,7 +4,11 @@ Custom datatypes for use in typehints.
 from typing import(
     Any,
     Protocol,
+    Literal
 )
+
+
+AcceptableBodyParts = Literal['legs', 'hands', 'body', 'head', 'arse']
 
 
 class LegitSKLModel(Protocol):

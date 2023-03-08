@@ -4,46 +4,44 @@ Models for data provided to API endpoint.
 from pydantic import (
     BaseModel,
     validator,
+    Field,
+    UUID4,
 )
 from typing import (
     List,
     Optional,
 )
-
+import os
 from utils.custom_errors import (
     DateNotInPeriodError,
     ValueNotInSetError,
 )
 from utils.helper_funcs import str_to_dt
+from utils.custom_types import AcceptableBodyParts
 import utils.params as params
+from datetime import datetime
+from uuid import uuid4
 
 
 class Clothes(BaseModel):
     """Clothing datatype."""
     brand: str
     cost: float
-    where_worn: Optional[str]
+    where_worn: Optional[AcceptableBodyParts]
 
     class Config:
         validate_assignment = True
 
-    @validator('where_worn', pre=True)
-    def clothes_on_acceptable_bodypart(cls, value) -> Optional[str]:
-        acceptable_bodyparts = ['legs', 'hands', 'body', 'head', ]
-
-        if value not in acceptable_bodyparts:
-            raise ValueNotInSetError(value=value, list_of_vals=acceptable_bodyparts)
-
-        return value
-
 
 class RequestBody(BaseModel):
     """Expected structure of requests to API endpoint."""
+    uuid: UUID4 = Field(default_factory=uuid4)
+    timestamp_requested: datetime = Field(default_factory=datetime.now)
     name: str
-    age: int
+    age: int = Field(..., ge=0)
     date_of_accident: str
     number_of_limbs_before_accident: float
-    clothes: Optional[List[Clothes]] = None
+    clothes: List[Clothes] = Field(default_factory=list)
 
     class Config:
         validate_assignment = True
@@ -58,3 +56,11 @@ class RequestBody(BaseModel):
             )
 
         return value
+
+
+class ResponseMessage(BaseModel):
+    """Expected structure of response from the ML model."""
+    uuid: UUID4
+    timestamp_requested: datetime
+    timestamp_response: datetime = Field(default_factory=datetime.now)
+    prediction: float = Field(..., ge=0.0, le=1.0)

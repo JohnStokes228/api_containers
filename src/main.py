@@ -3,7 +3,10 @@ from fastapi import (
     FastAPI
 )
 from typing import Dict
-from utils.data_models import RequestBody
+from utils.data_models import (
+    RequestBody,
+    ResponseMessage,
+)
 from utils.io_manager import IOManager
 
 app = FastAPI()
@@ -11,10 +14,11 @@ model = IOManager().read()
 
 
 @app.post("/predict")
-def make_prediction(request_message: RequestBody) -> Dict[str, str]:
-    predictions = model.predict(X=request_message)
+def make_prediction(request_message: RequestBody) -> str:
+    prediction = model.predict(X=request_message)
+    response = ResponseMessage(**request_message.dict(), prediction=prediction)
 
-    return predictions
+    return response.json()
 
 
 if __name__ == "__main__":
